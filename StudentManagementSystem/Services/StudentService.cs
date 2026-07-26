@@ -1,13 +1,15 @@
 ﻿using StudentManagementSystem.Models;
+using System.Linq;
 namespace StudentManagementSystem.Services
 {
     public class StudentService
     {
-        public List<Student> GetStudents()
+        private readonly List<Student> _students;
+        public StudentService()
         {
-            return new List<Student>
+            _students = new List<Student>
             {
-                 new Student
+                new Student
                 {
                     Id = 1,
                     Name = "Mukul",
@@ -48,6 +50,51 @@ namespace StudentManagementSystem.Services
                     Email = "ankit@gmail.com"
                 }
             };
+        }
+        public List<Student> GetStudents()
+        {
+            return _students;
+        }
+        public Student? GetStudentById(int id)
+        {
+            return GetStudents().FirstOrDefault(student => student.Id == id);
+        }
+        public void AddStudent(Student student)
+        {
+            int maxId = 0;
+            foreach(var currStudent in _students)
+            {
+                if (currStudent.Id > maxId)
+                    maxId = currStudent.Id;
+            }
+            student.Id = 1 + maxId;
+            _students.Add(student);
+        }
+        public bool UpdateStudent(Student updatedStudent)
+        {
+            foreach(var student in _students)
+            {
+                if(student.Id == updatedStudent.Id)
+                {
+                    student.Name = updatedStudent.Name;
+                    student.Course = updatedStudent.Course;
+                    student.Age = updatedStudent.Age;
+                    student.Email = updatedStudent.Email;
+                    return true;
+                }
+            }
+            return false;
+
+        }
+        public bool DeleteStudent(int id)
+        {
+            Student? studentToDelete = GetStudentById(id);
+            if (studentToDelete == null)
+            {
+                return false;
+            }
+            _students.Remove(studentToDelete);
+            return true;
         }
     }
 }

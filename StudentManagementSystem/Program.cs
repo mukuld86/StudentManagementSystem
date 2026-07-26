@@ -10,7 +10,7 @@ namespace StudentManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<StudentService>();
+            builder.Services.AddSingleton<StudentService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
