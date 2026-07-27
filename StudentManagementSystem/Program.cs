@@ -1,3 +1,5 @@
+using StudentManagementSystem.Interfaces;
+using StudentManagementSystem.Repositories;
 using StudentManagementSystem.Services;
 
 namespace StudentManagementSystem
@@ -10,6 +12,7 @@ namespace StudentManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IStudentRepository, InMemoryStudentRepository>();
             builder.Services.AddSingleton<StudentService>();
             var app = builder.Build();
 
