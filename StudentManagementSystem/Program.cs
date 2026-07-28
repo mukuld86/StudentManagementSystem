@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using StudentManagementSystem.Interfaces;
 using StudentManagementSystem.Repositories;
 using StudentManagementSystem.Services;
+using StudentManagementSystem.Data;
 
 namespace StudentManagementSystem
 {
@@ -12,8 +14,13 @@ namespace StudentManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IStudentRepository, InMemoryStudentRepository>();
-            builder.Services.AddSingleton<StudentService>();
+            //builder.Services.AddSingleton<IStudentRepository, InMemoryStudentRepository>();
+            builder.Services.AddScoped<StudentService>();
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
