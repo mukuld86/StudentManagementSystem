@@ -10,7 +10,7 @@ namespace StudentManagementSystem.Models
         [Required]
         [StringLength (30)]
         public string Course { get; set; } = string.Empty;
-        [Range(15,40)]
+        [Range(18,60)]
         public int Age { get; set;  }
         [Required]
         [EmailAddress]

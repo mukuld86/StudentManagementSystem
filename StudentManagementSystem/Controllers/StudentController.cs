@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentManagementSystem.Models;
 using StudentManagementSystem.Services;
-using StudentManagementSystem.ViewModels;
 namespace StudentManagementSystem.Controllers
 {
     public class StudentController : Controller
@@ -31,19 +30,12 @@ namespace StudentManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(StudentCreateViewModel model)
+        public IActionResult Create(Student student)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(student);
             }
-            Student student = new Student
-            {
-                Name = model.Name,
-                Course = model.Course,
-                Age = model.Age,
-                Email = model.Email
-            };
             _studentService.AddStudent(student);
             TempData["SuccessMessage"] = "Student added successfully";
             return RedirectToAction(nameof(Index));

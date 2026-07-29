@@ -1,4 +1,4 @@
-﻿@model StudentManagementSystem.ViewModels.StudentCreateViewModel;
+﻿@model StudentManagementSystem.Models.Student;
 
 <h2>Add Student</h2>
 <form asp-action="Create" method="post">
@@ -58,7 +58,9 @@
     <button class="btn btn-success">
         Save
     </button>
-
+    <a asp-action="Index" class="btn btn-secondary">
+        Go Back
+    </a>
 </form>
 
 @section Scripts
