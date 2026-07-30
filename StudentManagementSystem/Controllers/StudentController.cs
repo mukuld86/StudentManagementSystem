@@ -15,9 +15,9 @@ namespace StudentManagementSystem.Controllers
             var students = _studentService.GetStudents();
             return View(students);
         }
-        public IActionResult Details(int id)
+        public IActionResult Details(int registrationNumber)
         {
-            var student = _studentService.GetStudentById(id);
+            Student? student = _studentService.GetByRegistrationNumber(registrationNumber);
             if (student == null)
             {
                 return NotFound();
@@ -41,9 +41,9 @@ namespace StudentManagementSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int registrationNumber)
         {
-            var student = _studentService.GetStudentById(id);
+            var student = _studentService.GetByRegistrationNumber(registrationNumber);
             if (student == null){
                 return NotFound();
             }
@@ -65,9 +65,9 @@ namespace StudentManagementSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int registrationNumber)
         {
-            var student = _studentService.GetStudentById(id);
+            var student = _studentService.GetByRegistrationNumber(registrationNumber);
             if (student == null)
             {
                 return NotFound();
@@ -77,7 +77,7 @@ namespace StudentManagementSystem.Controllers
         [HttpPost]
         public IActionResult Delete(Student student)
         {
-            bool deleted = _studentService.DeleteStudent(student.Id);
+            bool deleted = _studentService.DeleteStudent(student.RegistrationNumber);
             if (!deleted)
             {
                 return NotFound();

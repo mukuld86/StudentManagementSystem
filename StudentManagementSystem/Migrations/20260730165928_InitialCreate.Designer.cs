@@ -11,7 +11,7 @@ using StudentManagementSystem.Data;
 namespace StudentManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260728162733_InitialCreate")]
+    [Migration("20260730165928_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -26,11 +26,11 @@ namespace StudentManagementSystem.Migrations
 
             modelBuilder.Entity("StudentManagementSystem.Models.Student", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RegistrationNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RegistrationNumber"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -49,7 +49,7 @@ namespace StudentManagementSystem.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("Id");
+                    b.HasKey("RegistrationNumber");
 
                     b.ToTable("Students");
                 });

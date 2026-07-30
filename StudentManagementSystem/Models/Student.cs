@@ -3,7 +3,8 @@ namespace StudentManagementSystem.Models
 {
     public class Student
     {
-        public int Id { get; set; }
+        [Key]
+        public int RegistrationNumber { get; set; }
         [Required]
         [StringLength(30)]
         public string Name { get; set; } = string.Empty;

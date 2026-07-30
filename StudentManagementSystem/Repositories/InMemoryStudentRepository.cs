@@ -3,7 +3,7 @@ using StudentManagementSystem.Models;
 
 namespace StudentManagementSystem.Repositories
 {
-    public class InMemoryStudentRepository : IStudentRepository
+    public class InMemoryStudentRepository 
     {
         private readonly List<Student> _students;
         public InMemoryStudentRepository()
@@ -12,7 +12,7 @@ namespace StudentManagementSystem.Repositories
             {
                  new Student
                 {
-                    Id = 1,
+                    RegistrationNumber = 1,
                     Name = "Mukul",
                     Course = "CSE",
                     Age = 22,
@@ -20,7 +20,7 @@ namespace StudentManagementSystem.Repositories
                 },
                 new Student
                 {
-                    Id = 2,
+                    RegistrationNumber = 2,
                     Name = "Rahul",
                     Course = "IT",
                     Age = 21,
@@ -28,7 +28,7 @@ namespace StudentManagementSystem.Repositories
                 },
                 new Student
                 {
-                    Id = 3,
+                    RegistrationNumber = 3,
                     Name = "Priya",
                     Course = "ECE",
                     Age = 23,
@@ -36,7 +36,7 @@ namespace StudentManagementSystem.Repositories
                 },
                 new Student
                 {
-                    Id = 4,
+                    RegistrationNumber = 4,
                     Name = "Neha",
                     Course = "AI",
                     Age = 20,
@@ -44,7 +44,7 @@ namespace StudentManagementSystem.Repositories
                 },
                 new Student
                 {
-                    Id = 5,
+                    RegistrationNumber = 5,
                     Name = "Ankit",
                     Course = "CSE",
                     Age = 22,
@@ -61,12 +61,12 @@ namespace StudentManagementSystem.Repositories
             int maxId = 0;
             foreach(var existingStudent in _students)
             {
-                if (existingStudent.Id > maxId)
+                if (existingStudent.RegistrationNumber > maxId)
                 {
-                    maxId = existingStudent.Id;
+                    maxId = existingStudent.RegistrationNumber;
                 }
             }
-            student.Id = maxId+1;
+            student.RegistrationNumber = maxId+1;
             _students.Add(student);
         }
 
@@ -76,7 +76,7 @@ namespace StudentManagementSystem.Repositories
         {
             foreach(var student in _students)
             {
-                if(student.Id== id)
+                if(student.RegistrationNumber== id)
                 {
                     return student;
                 }
@@ -88,7 +88,7 @@ namespace StudentManagementSystem.Repositories
         {
             foreach(var existingStudent in _students)
             {
-                if(existingStudent.Id == student.Id)
+                if(existingStudent.RegistrationNumber == student.RegistrationNumber)
                 {
                     existingStudent.Name = student.Name;
                     existingStudent.Course = student.Course;

@@ -23,11 +23,11 @@ namespace StudentManagementSystem.Migrations
 
             modelBuilder.Entity("StudentManagementSystem.Models.Student", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RegistrationNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RegistrationNumber"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -46,7 +46,7 @@ namespace StudentManagementSystem.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("Id");
+                    b.HasKey("RegistrationNumber");
 
                     b.ToTable("Students");
                 });

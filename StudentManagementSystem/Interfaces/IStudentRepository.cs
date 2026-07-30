@@ -5,10 +5,10 @@ namespace StudentManagementSystem.Interfaces
     public interface IStudentRepository
     {
         List<Student> GetAll();
-        Student? GetById(int id);
+        Student? GetByRegistrationNumber(int registrationNumber);
         void Add(Student student);
         bool Update(Student student);
-        bool Delete(int id);
+        bool Delete(int registrationNumber);
 
     }
 }

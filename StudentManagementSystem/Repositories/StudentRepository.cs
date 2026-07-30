@@ -21,9 +21,9 @@ namespace StudentManagementSystem.Repositories
             _context.SaveChanges();
         }
 
-        public bool Delete(int id)
+        public bool Delete(int registrationNumber)
         {
-            var student = _context.Students.Find(id);
+            var student = _context.Students.Find(registrationNumber);
             if (student == null)
             {
                 return false;
@@ -34,14 +34,14 @@ namespace StudentManagementSystem.Repositories
         }
 
 
-        public Student? GetById(int id)
+        public Student? GetByRegistrationNumber(int registrationNumber)
         {
-            return _context.Students.Find(id);
+            return _context.Students.Find(registrationNumber);
         }
 
         public bool Update(Student student)
         {
-            var existingStudent = _context.Students.Find(student.Id);
+            var existingStudent = _context.Students.Find(student.RegistrationNumber);
             if (existingStudent == null)
             {
                 return false;

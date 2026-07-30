@@ -15,9 +15,9 @@ namespace StudentManagementSystem.Services
         {
             return _repository.GetAll();
         }
-        public Student? GetStudentById(int id)
+        public Student? GetByRegistrationNumber(int registrationNumber)
         {
-            return _repository.GetById(id);
+            return _repository.GetByRegistrationNumber(registrationNumber);
         }
         public void AddStudent(Student student)
         {
@@ -28,9 +28,9 @@ namespace StudentManagementSystem.Services
             return _repository.Update(student);
 
         }
-        public bool DeleteStudent(int id)
+        public bool DeleteStudent(int registrationNumber)
         {
-            return _repository.Delete(id);
+            return _repository.Delete(registrationNumber);
         }
     }
 }

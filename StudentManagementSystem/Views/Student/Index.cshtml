@@ -8,7 +8,7 @@
 <table class="table table-striped table-bordered">
     <thead class="table-dark">
         <tr>
-            <th>Id</th>
+            <th>Registration Number</th>
             <th>Name</th>
             <th>Course</th>
             <th>Age</th>
@@ -20,18 +20,17 @@
         @foreach(var student in Model)
         {
             <tr>
-                <td>@student.Id</td>
+                <td>@student.RegistrationNumber</td>
                 <td>@student.Name</td>
                 <td>@student.Course</td>
                 <td>@student.Age</td>
                 <td>@student.Email</td>
                 <td>
-                    <a asp-controller="Student" asp-action="Details" asp-route-id="@student.Id" class="btn btn-info btn-sm">Details</a>
-                    <a asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id" class="btn btn-info btn-sm">Edit</a>
-                    <a asp-controller="Student" asp-action="Delete" asp-route-id="@student.Id" class="btn btn-info btn-sm">Delete</a>
+                    <a asp-controller="Student" asp-action="Details" asp-route-registrationNumber="@student.RegistrationNumber" class="btn btn-info btn-sm">Details</a>
+                    <a asp-controller="Student" asp-action="Edit" asp-route-registrationNumber="@student.RegistrationNumber" class="btn btn-info btn-sm">Edit</a>
+                    <a asp-controller="Student" asp-action="Delete" asp-route-registrationNumber="@student.RegistrationNumber" class="btn btn-info btn-sm">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
-</table>
-<a asp-action="Create" class="btn btn-primary">Add new Student</a>
+</table>                 
