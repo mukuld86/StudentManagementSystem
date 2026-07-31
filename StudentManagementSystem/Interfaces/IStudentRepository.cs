@@ -9,6 +9,6 @@ namespace StudentManagementSystem.Interfaces
         void Add(Student student);
         bool Update(Student student);
         bool Delete(int registrationNumber);
-
+        Student? Search(int? registrationNumber, string? email);
     }
 }

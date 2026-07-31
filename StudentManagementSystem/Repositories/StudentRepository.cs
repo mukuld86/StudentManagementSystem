@@ -53,5 +53,12 @@ namespace StudentManagementSystem.Repositories
             _context.SaveChanges();
             return true;
         }
+        public Student? Search(int? registrationNumber, string? email)
+        {
+            return _context.Students.FirstOrDefault(s =>
+            (registrationNumber.HasValue && s.RegistrationNumber == registrationNumber)
+                ||
+                (!string.IsNullOrWhiteSpace(email) && email == s.Email));
+        }
     }
 }

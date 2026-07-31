@@ -85,5 +85,26 @@ namespace StudentManagementSystem.Controllers
             TempData["SuccessMessage"] = "Student deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Search(int? registrationNumber, string? email)
+        {
+            if(!registrationNumber.HasValue && string.IsNullOrWhiteSpace(email))
+            {
+                ModelState.AddModelError("", "Please enter either Registration Number or Email");
+                return View();
+            }
+            var student = _studentService.Search(registrationNumber, email);
+            if (student == null)
+            {
+                ViewBag.Message = "Student not found!";
+                return View();
+            }
+            return View("Details",student);
+        }
     }
 }

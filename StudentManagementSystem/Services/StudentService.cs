@@ -32,5 +32,9 @@ namespace StudentManagementSystem.Services
         {
             return _repository.Delete(registrationNumber);
         }
+        public Student? Search(int? registrationNumber, string? Email)
+        {
+            return _repository.Search(registrationNumber, Email);
+        }
     }
 }
