@@ -88,21 +88,25 @@ namespace StudentManagementSystem.Controllers
         [HttpGet]
         public IActionResult Search()
         {
-            return View();
+            return View(new SearchRequest());
         }
         [HttpPost]
-        public IActionResult Search(int? registrationNumber, string? email)
+        public IActionResult Search(SearchRequest request)
         {
-            if(!registrationNumber.HasValue && string.IsNullOrWhiteSpace(email))
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+            if(!request.RegistrationNumber.HasValue && string.IsNullOrWhiteSpace(request.Email))
             {
                 ModelState.AddModelError("", "Please enter either Registration Number or Email");
                 return View();
             }
-            var student = _studentService.Search(registrationNumber, email);
+            var student = _studentService.Search(request);
             if (student == null)
             {
                 ViewBag.Message = "Student not found!";
-                return View();
+                return View(request);
             }
             return View("Details",student);
         }

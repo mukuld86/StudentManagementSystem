@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Search Student";
-}
+﻿@model StudentManagementSystem.Models.SearchRequest
 
 <h2>Search Student</h2>
 
@@ -9,20 +7,18 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mb-3">
-        <label>Registration Number</label>
-        <input type="number"
-               name="registrationNumber"
-               class="form-control" />
+        <label asp-for="RegistrationNumber"></label>
+        <input asp-for="RegistrationNumber" class="form-control" />
+        <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label>Email</label>
-        <input type="email"
-               name="email"
-               class="form-control" />
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
-    <button class="btn btn-primary">
+    <button type="submit" class="btn btn-primary">
         Search
     </button>
 
@@ -33,4 +29,9 @@
     <div class="alert alert-warning mt-3">
         @ViewBag.Message
     </div>
+}
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
 }

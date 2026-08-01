@@ -53,12 +53,12 @@ namespace StudentManagementSystem.Repositories
             _context.SaveChanges();
             return true;
         }
-        public Student? Search(int? registrationNumber, string? email)
+        public Student? Search(SearchRequest request)
         {
             return _context.Students.FirstOrDefault(s =>
-            (registrationNumber.HasValue && s.RegistrationNumber == registrationNumber)
+            (request.RegistrationNumber.HasValue && s.RegistrationNumber == request.RegistrationNumber)
                 ||
-                (!string.IsNullOrWhiteSpace(email) && email == s.Email));
+                (!string.IsNullOrWhiteSpace(request.Email) && request.Email == s.Email));
         }
     }
 }
