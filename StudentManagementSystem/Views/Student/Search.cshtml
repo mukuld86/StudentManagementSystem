@@ -9,29 +9,129 @@
     <div class="mb-3">
         <label asp-for="RegistrationNumber"></label>
         <input asp-for="RegistrationNumber" class="form-control" />
-        <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <span asp-validation-for="Email"
+              class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary">
         Search
     </button>
+    <div class="mb-3">
 
+        <label>Sort By</label>
+
+        <select asp-for="SortBy" class="form-select">
+
+            <option value="">Registration Number</option>
+
+            <option value="NameAsc">Name (A-Z)</option>
+
+            <option value="NameDesc">Name (Z-A)</option>
+
+            <option value="AgeAsc">Age (Low to High)</option>
+
+            <option value="AgeDesc">Age (High to Low)</option>
+
+            <option value="RegAsc">Registration Number (Ascending)</option>
+
+            <option value="RegDesc">Registration Number (Descending)</option>
+
+        </select>
+
+    </div>
 </form>
 
-@if (ViewBag.Message != null)
+
+@if (Model.Results.Any())
+{
+    <hr />
+    <h5 class="text-primary">
+        Search Results (@Model.Results.Count)
+    </h5>
+    <hr />
+
+    <h3>Search Results</h3>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+
+            <tr>
+
+                <th>Registration No</th>
+
+                <th>Name</th>
+
+                <th>Course</th>
+
+                <th>Age</th>
+
+                <th>Email</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var student in Model.Results)
+            {
+                <tr>
+
+                    <td>@student.RegistrationNumber</td>
+
+                    <td>@student.Name</td>
+
+                    <td>@student.Course</td>
+
+                    <td>@student.Age</td>
+
+                    <td>@student.Email</td>
+
+                    <td>
+
+                        <a asp-action="Details"
+                           asp-route-registrationNumber="@student.RegistrationNumber"
+                           class="btn btn-info btn-sm">
+
+                            Details
+
+                        </a>
+
+                        <a asp-action="Edit"
+                           asp-route-registrationNumber="@student.RegistrationNumber"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+                        <a asp-action="Delete" asp-route-registrationNumber="@student.RegistrationNumber" class="btn btn-info btn-sm">Delete</a>
+
+                
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+}
+else if (Context.Request.Method == "POST")
 {
     <div class="alert alert-warning mt-3">
-        @ViewBag.Message
+        No students found matching your search criteria.
     </div>
-}
-
-@section Scripts
-{
-    <partial name="_ValidationScriptsPartial" />
 }

@@ -53,12 +53,59 @@ namespace StudentManagementSystem.Repositories
             _context.SaveChanges();
             return true;
         }
-        public Student? Search(SearchRequest request)
+        public List<Student> Search(SearchRequest request)
         {
-            return _context.Students.FirstOrDefault(s =>
-            (request.RegistrationNumber.HasValue && s.RegistrationNumber == request.RegistrationNumber)
-                ||
-                (!string.IsNullOrWhiteSpace(request.Email) && request.Email == s.Email));
+            IQueryable<Student> query = _context.Students;
+
+            if (request.RegistrationNumber.HasValue)
+            {
+                query = query.Where(s =>
+                    s.RegistrationNumber == request.RegistrationNumber);
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Email))
+            {
+                query = query.Where(s =>
+                    s.Email == request.Email);
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Name))
+            {
+                query = query.Where(s =>
+                    s.Name.Contains(request.Name));
+            }
+
+            switch (request.SortBy)
+            {
+                case "NameAsc":
+                    query = query.OrderBy(s => s.Name);
+                    break;
+
+                case "NameDesc":
+                    query = query.OrderByDescending(s => s.Name);
+                    break;
+
+                case "AgeAsc":
+                    query = query.OrderBy(s => s.Age);
+                    break;
+
+                case "AgeDesc":
+                    query = query.OrderByDescending(s => s.Age);
+                    break;
+
+                case "RegAsc":
+                    query = query.OrderBy(s => s.RegistrationNumber);
+                    break;
+
+                case "RegDesc":
+                    query = query.OrderByDescending(s => s.RegistrationNumber);
+                    break;
+
+                default:
+                    query = query.OrderBy(s => s.RegistrationNumber);
+                    break;
+            }
+            return query.ToList();
         }
     }
 }

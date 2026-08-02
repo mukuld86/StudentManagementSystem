@@ -9,6 +9,7 @@ namespace StudentManagementSystem.Interfaces
         void Add(Student student);
         bool Update(Student student);
         bool Delete(int registrationNumber);
-        Student? Search(SearchRequest request);
+        List<Student> Search(SearchRequest request);
+
     }
 }

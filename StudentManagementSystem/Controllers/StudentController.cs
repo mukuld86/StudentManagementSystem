@@ -97,18 +97,18 @@ namespace StudentManagementSystem.Controllers
             {
                 return View(request);
             }
-            if(!request.RegistrationNumber.HasValue && string.IsNullOrWhiteSpace(request.Email))
+            if (!request.RegistrationNumber.HasValue &&
+                string.IsNullOrWhiteSpace(request.Email) &&
+                string.IsNullOrWhiteSpace(request.Name))
             {
-                ModelState.AddModelError("", "Please enter either Registration Number or Email");
-                return View();
-            }
-            var student = _studentService.Search(request);
-            if (student == null)
-            {
-                ViewBag.Message = "Student not found!";
+                ModelState.AddModelError("", "Please enter at least one search criterion.");
+
                 return View(request);
             }
-            return View("Details",student);
+
+            request.Results = _studentService.Search(request);
+            return View(request);
+
         }
     }
 }
